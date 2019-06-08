@@ -18,3 +18,15 @@ I use Visual Studio Code with the Ionide-Fsharp plugin. I load the code in FShar
 
 You can also use FSI in Visual Studio.
 
+
+# Python
+
+This was tested using python 2.7. 
+
+## Setup
+
+    pip install hypothesis
+
+## Running (Command line)
+
+    ./pytest
