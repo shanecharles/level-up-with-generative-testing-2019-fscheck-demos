@@ -2,3 +2,4 @@ __pycache__
 packages/
 fsharp/.paket/paket.exe
 .vscode/
+.ionide/

@@ -1,4 +1,5 @@
-#r "./packages/FsCheck/lib/net452/FsCheck.dll"
+#I "./packages/FsCheck/lib/net452/"
+#r "FsCheck.dll"
 #load "./DiscriminatorTypes.fsx"
 
 open FsCheck
@@ -17,11 +18,6 @@ let ``Multiplication even property`` (EvenInt x, y: int) =
 Check.Verbose ``Multiplication even property``
 
 
-let ``Multiplication commutative property`` (x : int, y : int) =
-    x * y = y * x
-
-
-Check.Verbose ``Multiplication commutative property``
 
 
 let evilMultiplication x y =

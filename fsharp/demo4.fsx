@@ -1,4 +1,5 @@
-#r "./packages/FsCheck/lib/net452/FsCheck.dll"
+#I "./packages/FsCheck/lib/net452/"
+#r "FsCheck.dll"
 
 open FsCheck
 

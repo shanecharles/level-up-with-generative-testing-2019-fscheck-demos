@@ -1,4 +1,5 @@
-#r "../packages/FsCheck/lib/net452/FsCheck.dll"
+#I "./packages/FsCheck/lib/net452/"
+#r "FsCheck.dll"
 
 open FsCheck
 
@@ -14,6 +15,25 @@ type Money = Money of decimal with
     override x.ToString() = x.Get.ToString()
     static member op_Explicit(Money v) = v
 
+let private genChange_internal = Gen.choose (0, 99)
+                                 |> Gen.map (fun x -> (decimal x / 100M))
+
+let private genMoney_internal = Gen.zip 
+                                  (Arb.generate<int>) 
+                                  (genChange_internal)
+                                |> Gen.map (fun (p,d) -> (decimal p) + d )
+
+type MoneyTypes =
+    static member Money () =
+        genMoney_internal
+        |> Arb.fromGen
+        |> Arb.convert Money decimal
+
+    static member PositiveMoney () = 
+        genMoney_internal
+        |> Arb.fromGen
+        |> Arb.mapFilter abs (fun d -> d > 0M)
+        |> Arb.convert PositiveMoney decimal
 
 
 type EvenInt = EvenInt of int with
